@@ -8,13 +8,6 @@ const boroughs = ['Bronx', 'Brooklyn', 'Manhattan', 'Queens', 'Staten Island'];
 
 sunday_mics.use(bodyParser.json());
 
-var mysqlConnection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "123q321KB",
-  database: "mykes",
-  connectionLimit: 10,
-});
 
 // pool.query(`select * from monday_mics`, (err, result, fields) =>{
 //     if(err){

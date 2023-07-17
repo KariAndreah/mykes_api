@@ -1,8 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser'; 
-import sunday_mics from './routes/sunday.js';
+import sunday_mic from './routes/mics.js';
 
 import sundayMics from './routes/mics.js'
+
+
 
 const app = express(); 
 const PORT = 9999; 
@@ -22,7 +24,7 @@ app.use((_, res, next) => {
 
 // app.use('/mics', sundayMics)
 
-// app.use('/', sunday_mics)
+app.use('/', sunday_mic)
 
 app.get('/', (req,res) => {
      res.send('Hello from Homepage')

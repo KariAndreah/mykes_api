@@ -1,8 +1,25 @@
 'use strict';
 
 import express from 'express';
+import fs from 'fs';
+import {parse} from 'csv-parse';
 
-const router = express.Router(); 
+const sunday_mic = express.Router(); 
+
+
+
+var csvData=[];
+fs.createReadStream("data/csv/Sunday.csv")
+    .pipe(parse({delimiter: ';'}))
+    .on('data', function(csvrow) {
+        console.log(csvrow);
+        //do something with csvrow
+        csvData.push(csvrow);        
+    })
+    .on('end',function() {
+      //do something with csvData
+      console.log(csvData);
+    });
 
 // const openMics = [
 //     {
@@ -17,9 +34,11 @@ const router = express.Router();
 // ]
 
 // all routes in here are starting with /mics
-router.get('/', (req, res) => {
-    console.log(openMics);
-    res.send(openMics)
+
+
+sunday_mic.get('/hiii', (req, res) => {
+    console.log(csvData);
+    res.send(csvData)
 })
 
-export default router; 
+export default sunday_mic; 
