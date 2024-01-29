@@ -5,7 +5,7 @@ import { router, router1 } from "./app/mics/routes.js";
 // import sundayMics from "./routes/mics.js";
 
 const app = express();
-const PORT = process.env.PORT || 9999;
+const PORT = process.env.PORT;
 
 // app.use(bodyParser.json());
 app.use(express.json());
