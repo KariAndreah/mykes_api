@@ -4,11 +4,14 @@
   "description": "",
   "main": "index.js",
   "type": "module",
-  "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "nodemon": "nodemon dev-server.js"
-  },
+    "scripts": {
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+    },
   "keywords": [
     "heroku"
   ],
@@ -19,7 +22,8 @@
     "dotenv": "^16.4.1",
     "express": "^4.18.2",
     "mysql": "^2.18.1",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "serve": "^14.2.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.3"

@@ -50,7 +50,7 @@ All data is stored in a Heroku Postgres Database. The API was built using Spring
 **_@Parameters are optional_**
 
 **_All requests have Pagination and Sorting, append parameters:_**\
-pageNo={}\
+page={}\
 pageSize={}\
 sortBy={}
 
