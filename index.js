@@ -1,7 +1,14 @@
 import express from "express";
 import bodyParser from "body-parser";
 // import sunday_mic from "./routes/mics.js";
-import { router, router1 } from "./app/mics/routes.js";
+import {
+  router,
+  router1,
+  router2,
+  router3,
+  router4,
+  router5,
+} from "./app/mics/routes.js";
 // import sundayMics from "./routes/mics.js";
 
 const app = express();
@@ -32,6 +39,10 @@ app.get("/", (req, res) => {
 
 app.use("/mic", router);
 app.use("/mics", router1);
+app.use("/mic", router2);
+app.use("/mics", router3);
+app.use("/mic", router4);
+app.use("/mics", router5);
 
 console.log("THIS IS ROUTER", router);
 
