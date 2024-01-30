@@ -51,5 +51,3 @@ app.use("/mic", individualRouter);
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT} `)
 );
-
-console.log(process.env);
