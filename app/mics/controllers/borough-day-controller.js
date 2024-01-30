@@ -2,11 +2,11 @@ import pool from "../../../db.js";
 import { getMicListingByBoroughDay } from "../../mics/queries.js";
 
 const boroughDayController = async (req, res) => {
-  let borough = req.query.borough;
+  let borough = req.query.borough.split(",");
   let day = req.query.day;
   let page = parseInt(req.query.page);
   console.log(req.query.page);
-  console.log(req.query.borough);
+  console.log(borough);
   console.log(req.query.day);
 
   await pool.query(

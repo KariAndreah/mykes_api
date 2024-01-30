@@ -38,14 +38,14 @@ app.get("/", (req, res) => {
   res.send("Hello from Homepage");
 });
 
-app.use("/all", allRouter);
-app.use("/free", allFreeRouter);
-app.use("/borough", boroughRouter);
-app.use("/freeBorough", boroughFreeRouter);
-app.use("/day", dayRouter);
-app.use("/freeDay", dayFreeRouter);
-app.use("/boroughDay", boroughDayRouter);
-app.use("/freeBoroughDay", boroughDayFreeRouter);
+app.use("/mics/all", allRouter);
+app.use("/mics/free", allFreeRouter);
+app.use("/mics/borough", boroughRouter);
+app.use("/mics/freeBorough", boroughFreeRouter);
+app.use("/mics/day", dayRouter);
+app.use("/mics/freeDay", dayFreeRouter);
+app.use("/mics/boroughDay", boroughDayRouter);
+app.use("/mics/freeBoroughDay", boroughDayFreeRouter);
 app.use("/mic", individualRouter);
 
 app.listen(PORT, () =>

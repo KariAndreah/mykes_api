@@ -2,7 +2,7 @@ import pool from "../../../db.js";
 import { getMicListingByBoroughDayFree } from "../../mics/queries.js";
 
 const boroughDayFreeController = async (req, res) => {
-  let borough = req.query.borough;
+  let borough = req.query.borough.split(",");
   let day = req.query.day;
   // let cost = parseInt(req.query.cost);
   let page = parseInt(req.query.page);

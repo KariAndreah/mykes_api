@@ -2,7 +2,7 @@ import pool from "../../../db.js";
 import { getMicListingByBoroughFree } from "../../mics/queries.js";
 
 const boroughFreeController = async (req, res) => {
-  let borough = req.query.borough;
+  let borough = req.query.borough.split(",");
   let page = parseInt(req.query.page);
 
   console.log(req.query.page);
