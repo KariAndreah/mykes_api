@@ -1,18 +1,19 @@
 import express from "express";
 import bodyParser from "body-parser";
 // import sunday_mic from "./routes/mics.js";
-import {
-  router,
-  router1,
-  router2,
-  router3,
-  router4,
-  router5,
-} from "./app/mics/routes.js";
 // import sundayMics from "./routes/mics.js";
+import allFreeRouter from "./app/mics/routes/all-free-route.js";
+import allRouter from "./app/mics/routes/all-route.js";
+import boroughRouter from "./app/mics/routes/borough-route.js";
+import boroughFreeRouter from "./app/mics/routes/borough-free-route.js";
+import boroughDayRouter from "./app/mics/routes/borough-day-route.js";
+import boroughDayFreeRouter from "./app/mics/routes/borough-day-free-route.js";
+import dayRouter from "./app/mics/routes/day-route.js";
+import dayFreeRouter from "./app/mics/routes/day-free-route.js";
+import individualRouter from "./app/mics/routes/individual-route.js";
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 9999;
 
 // app.use(bodyParser.json());
 app.use(express.json());
@@ -37,15 +38,18 @@ app.get("/", (req, res) => {
   res.send("Hello from Homepage");
 });
 
-app.use("/mic", router);
-app.use("/mics", router1);
-app.use("/mic", router2);
-app.use("/mics", router3);
-app.use("/mic", router4);
-app.use("/mics", router5);
-
-console.log("THIS IS ROUTER", router);
+app.use("/all", allRouter);
+app.use("/free", allFreeRouter);
+app.use("/borough", boroughRouter);
+app.use("/freeBorough", boroughFreeRouter);
+app.use("/day", dayRouter);
+app.use("/freeDay", dayFreeRouter);
+app.use("/boroughDay", boroughDayRouter);
+app.use("/freeBoroughDay", boroughDayFreeRouter);
+app.use("/mic", individualRouter);
 
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT} `)
 );
+
+console.log(process.env);

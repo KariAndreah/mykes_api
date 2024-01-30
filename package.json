@@ -27,5 +27,13 @@
   },
   "engines": {
     "node": "21.4.0"
+  },
+  "nodemonConfig": {
+    "ext": "js",
+    "ignore": [
+      "*.test.ts",
+      "db/*"
+    ],
+    "delay": "2"
   }
 }
