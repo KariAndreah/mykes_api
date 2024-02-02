@@ -3,7 +3,7 @@ import { getMicListingByBoroughDayTimeFree } from "../../mics/queries.js";
 
 const boroughDayTimeFreeController = async (req, res) => {
   let borough = req.query.borough.split(",");
-  let day = req.query.day;
+  let day = req.query.day.split(",");
   let page = parseInt(req.query.page);
   let time = req.query.time;
   console.log(borough);
