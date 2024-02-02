@@ -37,4 +37,4 @@ const boroughDayTimeController = async (req, res) => {
   );
 };
 
-export defau
+export default boroughDayTimeController;

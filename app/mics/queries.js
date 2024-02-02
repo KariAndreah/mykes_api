@@ -56,4 +56,28 @@ const getMicListingByDayFree = `SELECT * FROM mics ${innerJoin} WHERE Day = $1 O
 //   "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ($1) AND day = $2";
 
 const getMicListingByBoroughDay =
-  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = $2 OR
+  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = $2 ORDER BY start_time asc";
+
+const getMicListingByBoroughDayFree =
+  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = $2 AND cost_id=1 ORDER BY start_time asc";
+
+const getMicListingByBoroughDayTime =
+  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = $2 AND start_time >= $3 ORDER BY start_time asc";
+
+const getMicListingByBoroughDayTimeFree =
+  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = $2 AND start_time >= $3 AND cost_id=1 ORDER BY start_time asc";
+
+export {
+  getMicListing,
+  getAllFreeMicListing,
+  getAllMicListing,
+  getMicById,
+  getMicListingByBorough,
+  getMicListingByBoroughFree,
+  getMicListingByDay,
+  getMicListingByDayFree,
+  getMicListingByBoroughDayTime,
+  getMicListingByBoroughDayTimeFree,
+  getMicListingByBoroughDay,
+  getMicListingByBoroughDayFree,
+};
