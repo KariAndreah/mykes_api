@@ -5,4 +5,4 @@ const boroughDayTimeRouter = express.Router();
 
 boroughDayTimeRouter.get("/", boroughDayTimeController);
 
-export default boroughDayTimeRouter;
+export default boroughDa
