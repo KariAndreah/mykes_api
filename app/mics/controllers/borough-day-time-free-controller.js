@@ -14,7 +14,7 @@ const boroughDayTimeFreeController = async (req, res) => {
   let dayQuery;
   let boroughQuery;
 
-  if ((day = ["All"])) {
+  if (day.includes("All")) {
     dayQuery = [
       "Sunday",
       "Monday",
@@ -28,7 +28,7 @@ const boroughDayTimeFreeController = async (req, res) => {
     dayQuery = day;
   }
 
-  if ((borough = ["All"])) {
+  if (borough.includes("All")) {
     boroughQuery = [
       "Manhattan",
       "Queens",
@@ -36,8 +36,10 @@ const boroughDayTimeFreeController = async (req, res) => {
       "Staten-Island",
       "Brooklyn",
     ];
+    console.log(borough);
   } else {
     boroughQuery = borough;
+    console.log(boroughQuery);
   }
 
   await pool.query(
