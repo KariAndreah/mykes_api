@@ -24,8 +24,10 @@ const boroughFreeController = async (req, res) => {
         totalMics: results.rows.length,
         mics: results.rows.slice(page * 10 - 10, page * 10),
       });
+      res.end();
     } else {
       res.status(404).send({ message: "No mics found" });
+      res.end();
     }
   });
 };

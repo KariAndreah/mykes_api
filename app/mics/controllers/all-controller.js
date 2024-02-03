@@ -22,6 +22,7 @@ const allController = async (req, res) => {
       totalMics: results.rows.length,
       mics: results.rows.slice(page * 10 - 10, page * 10),
     });
+    res.end();
   });
 };
 
