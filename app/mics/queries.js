@@ -34,7 +34,11 @@ const getAllFreeMicListing =
 
 const getMicListing = "SELECT * FROM mics ORDER BY start_time asc";
 
-const getMicById = "SELECT * FROM mics WHERE id = $1";
+// const getMicById =
+//   "SELECT * FROM mics INNER JOIN mic_address ON mics.address_id = mic_address.address_id INNER JOIN mic_cost ON mics.cost_id = mic_cost.cost_id INNER JOIN mic_host ON mics.host_id = mic_host.host_id WHERE id = $1";
+
+const getMicById =
+  "SELECT * FROM mics INNER JOIN mic_address ON mics.address_id = mic_address.address_id INNER JOIN mic_cost ON mics.cost_id = mic_cost.cost_id INNER JOIN mic_host ON mics.host_id = mic_host.host_id INNER JOIN mic_occurrence ON mics.occurrence_id = mic_occurrence.occurrence_id INNER JOIN signup_instructions ON mics.signup_id = signup_instructions.signup_id WHERE id = $1";
 
 // const getMicById = mics
 //   .select(mic.id)
@@ -64,9 +68,9 @@ const getMicListingByBoroughDay =
 const getMicListingByBoroughDayFree =
   "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = $2 AND cost_id=1 ORDER BY start_time asc";
 
-const getMicListingByBoroughDayTime = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 ORDER BY ${dayCase}, start_time asc`;
+const getMicListingByBoroughDayTime = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id INNER JOIN mic_occurrence ON mics.occurrence_id = mic_occurrence.occurrence_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 ORDER BY ${dayCase}, start_time asc`;
 
-const getMicListingByBoroughDayTimeFree = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 AND cost_id=1 ORDER BY ${dayCase}, start_time asc`;
+const getMicListingByBoroughDayTimeFree = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id INNER JOIN mic_occurrence ON mics.occurrence_id = mic_occurrence.occurrence_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 AND cost_id=1 ORDER BY ${dayCase}, start_time asc`;
 
 export {
   getMicListing,
