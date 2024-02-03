@@ -20,6 +20,9 @@
 //   ],
 // });
 
+const dayCase =
+  " CASE WHEN Day = 'Sunday' THEN 1 WHEN Day = 'Monday' THEN 2 WHEN Day = 'Tuesday' THEN 3 WHEN Day = 'Wednesday' THEN 4 WHEN Day = 'Thursday' THEN 5 WHEN Day = 'Friday' THEN 6 WHEN Day = 'Saturday' THEN 7 END ASC";
+
 const innerJoin =
   "INNER JOIN mic_address ON mics.address_id = mic_address.address_id INNER JOIN mic_cost ON mics.cost_id = mic_cost.cost_id ORDER BY borough asc, start_time asc ";
 
@@ -61,11 +64,9 @@ const getMicListingByBoroughDay =
 const getMicListingByBoroughDayFree =
   "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = $2 AND cost_id=1 ORDER BY start_time asc";
 
-const getMicListingByBoroughDayTime =
-  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 ORDER BY start_time asc";
+const getMicListingByBoroughDayTime = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 ORDER BY ${dayCase}, start_time asc`;
 
-const getMicListingByBoroughDayTimeFree =
-  "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 AND cost_id=1 ORDER BY start_time asc";
+const getMicListingByBoroughDayTimeFree = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 AND cost_id=1 ORDER BY ${dayCase}, start_time asc`;
 
 export {
   getMicListing,

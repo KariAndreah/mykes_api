@@ -11,9 +11,38 @@ const boroughDayTimeFreeController = async (req, res) => {
   console.log(time);
   console.log("why doesnt this work", time);
 
+  let dayQuery;
+  let boroughQuery;
+
+  if ((day = ["All"])) {
+    dayQuery = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  } else {
+    dayQuery = day;
+  }
+
+  if ((borough = ["All"])) {
+    boroughQuery = [
+      "Manhattan",
+      "Queens",
+      "Bronx",
+      "Staten-Island",
+      "Brooklyn",
+    ];
+  } else {
+    boroughQuery = borough;
+  }
+
   await pool.query(
     getMicListingByBoroughDayTimeFree,
-    [borough, day, time],
+    [boroughQuery, dayQuery, time],
     (error, results) => {
       const pageCount = Math.ceil(results.rows.length / 10);
       if (!page) {

@@ -3,7 +3,7 @@ import { getMicListingByBoroughDayTime } from "../../mics/queries.js";
 
 const boroughDayTimeController = async (req, res) => {
   let borough = req.query.borough.split(",");
-  let day = req.query.day;
+  let day = req.query.day.split(",");
   let page = parseInt(req.query.page);
   let time = req.query.time;
   console.log(borough);
@@ -11,9 +11,38 @@ const boroughDayTimeController = async (req, res) => {
   console.log(time);
   console.log("why doesnt this work", time);
 
+  let dayQuery;
+  let boroughQuery;
+
+  if ((day = ["All"])) {
+    dayQuery = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  } else {
+    dayQuery = day;
+  }
+
+  if ((borough = ["All"])) {
+    boroughQuery = [
+      "Manhattan",
+      "Queens",
+      "Bronx",
+      "Staten-Island",
+      "Brooklyn",
+    ];
+  } else {
+    boroughQuery = borough;
+  }
+
   await pool.query(
     getMicListingByBoroughDayTime,
-    [borough, day, time],
+    [boroughQuery, dayQuery, time],
     (error, results) => {
       const pageCount = Math.ceil(results.rows.length / 10);
       if (!page) {
