@@ -14,7 +14,7 @@ import dayRouter from "./app/mics/routes/day-route.js";
 import dayFreeRouter from "./app/mics/routes/day-free-route.js";
 import individualRouter from "./app/mics/routes/individual-route.js";
 import cors from "cors";
-import api from "./src/routes/routes.ts";
+import api from "./src/routes/routes";
 
 const app = express();
 const PORT = process.env.PORT || 9999;
@@ -45,17 +45,17 @@ app.use((_, res, next) => {
 app.get("/", (req, res) => {
   res.send("Hello from Homepage");
 });
-app.use("/mics/all", allRouter);
-app.use("/mics/free", allFreeRouter);
-app.use("/mics/borough", boroughRouter);
-app.use("/mics/freeBorough", boroughFreeRouter);
-app.use("/mics/day", dayRouter);
-app.use("/mics/freeDay", dayFreeRouter);
-app.use("/mics/boroughDay", boroughDayRouter);
-app.use("/mics/freeBoroughDay", boroughDayFreeRouter);
-app.use("/mics/boroughDayTime", boroughDayTimeRouter);
-app.use("/mics/freeBoroughDayTime", boroughDayFreeTimeRouter);
-app.use("/mic", individualRouter);
+// app.use("/mics/all", allRouter);
+// app.use("/mics/free", allFreeRouter);
+// app.use("/mics/borough", boroughRouter);
+// app.use("/mics/freeBorough", boroughFreeRouter);
+// app.use("/mics/day", dayRouter);
+// app.use("/mics/freeDay", dayFreeRouter);
+// app.use("/mics/boroughDay", boroughDayRouter);
+// app.use("/mics/freeBoroughDay", boroughDayFreeRouter);
+// app.use("/mics/boroughDayTime", boroughDayTimeRouter);
+// app.use("/mics/freeBoroughDayTime", boroughDayFreeTimeRouter);
+// app.use("/mic", individualRouter);
 
 app.use(api);
 
