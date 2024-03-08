@@ -4,11 +4,13 @@ import getMics from "../services/mics.service";
 
 const router = express.Router();
 
-const micController = router.get("/api", async (req, res, next) => {
+const micController = router.get("/mics", async (req, res, next) => {
   let page: any = req.query.page;
+  let day: any = req.query.day;
+
   console.log("This is the Page Number: ", page);
   try {
-    const mics = await getMics();
+    const mics = await getMics(day);
 
     const pageCount = Math.ceil(mics.length / 10);
 

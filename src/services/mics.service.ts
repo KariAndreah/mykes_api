@@ -2,10 +2,21 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const getMics = async () => {
+const getMics = async (day?: string) => {
   const queries = [];
 
-  const mics = await prisma.mics.findMany();
+  if (day) {
+    queries.push({
+      day: {
+        equals: day,
+      },
+    });
+  }
+
+  const mics = await prisma.mics.findMany({
+    where: { day: day },
+    orderBy: { start_time: "asc" },
+  });
 
   return mics;
 };
