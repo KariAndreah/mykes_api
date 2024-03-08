@@ -14,9 +14,15 @@ import dayRouter from "./app/mics/routes/day-route.js";
 import dayFreeRouter from "./app/mics/routes/day-free-route.js";
 import individualRouter from "./app/mics/routes/individual-route.js";
 import cors from "cors";
+import api from "./src/routes/routes.ts";
 
 const app = express();
 const PORT = process.env.PORT || 9999;
+
+BigInt.prototype["toJSON"] = function () {
+  return parseInt(this.toString());
+};
+
 // app.use(bodyParser.json());
 app.use(express.json());
 
@@ -50,6 +56,9 @@ app.use("/mics/freeBoroughDay", boroughDayFreeRouter);
 app.use("/mics/boroughDayTime", boroughDayTimeRouter);
 app.use("/mics/freeBoroughDayTime", boroughDayFreeTimeRouter);
 app.use("/mic", individualRouter);
+
+app.use(api);
+
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT} `)
 );

@@ -1,3 +1,5 @@
+import { PrismaClient } from "@prisma/client";
+
 // import sql from "sql";
 
 // sql.setDialect("postgres");
@@ -46,7 +48,7 @@ const getMicById =
 //   .where(mics.name.equals(1))
 //   .toQuery();
 
-console.log("this is by id", getMicById);
+// console.log("this is by id", getMicById);
 // const getMicById =
 //   "SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id JOIN mic_cost ON mics.cost_id = mic_cost.cost_id JOIN mic_host ON mics.host_id = mic_host.host_id WHERE id = ANY($1)";
 
@@ -72,7 +74,30 @@ const getMicListingByBoroughDayTime = `SELECT * FROM mics JOIN mic_address ON mi
 
 const getMicListingByBoroughDayTimeFree = `SELECT * FROM mics JOIN mic_address ON mics.address_id = mic_address.address_id INNER JOIN mic_occurrence ON mics.occurrence_id = mic_occurrence.occurrence_id WHERE borough = ANY($1) AND day = ANY($2) AND start_time >= $3 AND cost_id=1 ORDER BY ${dayCase}, start_time asc`;
 
+const prisma = new PrismaClient();
+
+let allMics;
+
+async function main() {
+  // ... you will write your Prisma Client queries here
+  allMics = await prisma.mics.findMany();
+
+  // console.log("IS PRISMA WORKING: ", allMics);
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });
+
+console.log("what is this kari", allMics);
 export {
+  allMics,
   getMicListing,
   getAllFreeMicListing,
   getAllMicListing,
