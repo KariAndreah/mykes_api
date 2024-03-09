@@ -6,11 +6,17 @@ const router = express.Router();
 
 const micsController = router.get("/mics", async (req, res, next) => {
   let page: any = req.query.page;
-  let day: any = req.query.day;
 
-  console.log("This is the Page Number: ", page);
+  let params = {
+    day: req.query.day,
+    borough: req.query.borough,
+    // start_time: req.query.time,
+    cost: req.query.free,
+  };
+
+  console.log("This is the Cost: ", params.cost);
   try {
-    const mics = await getMics(day);
+    const mics = await getMics(params);
 
     const pageCount = Math.ceil(mics.length / 10);
 
@@ -40,20 +46,20 @@ const micController = router.get("/mic", async (req, res, next) => {
   try {
     const mics = await getMic(id);
 
-    const pageCount = Math.ceil(mics.length / 10);
+    // const pageCount = Math.ceil(mics.length / 10);
 
-    if (!page) {
-      page = 1;
-    }
-    if (page > pageCount) {
-      page = pageCount;
-    }
+    // if (!page) {
+    //   page = 1;
+    // }
+    // if (page > pageCount) {
+    //   page = pageCount;
+    // }
 
     res.status(200).json({
       currentPage: page,
-      totalPages: pageCount,
-      totalMics: mics.length,
-      mics: mics.slice(page * 10 - 10, page * 10),
+      totalPages: 1,
+      totalMics: 1,
+      mics: mics,
     });
   } catch (error) {
     next(error);
