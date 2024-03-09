@@ -1,8 +1,10 @@
 import express from "express";
-import micController from "../controllers/mics.controller";
+import { micController, micsController } from "../controllers/mics.controller";
 
-const api = express.Router().use(micController);
+const api = express.Router().use(micsController);
+
+const mic = express.Router().use(micController);
 
 console.log("Routes is working -----", api);
 
-export default api;
+export { api, mic };

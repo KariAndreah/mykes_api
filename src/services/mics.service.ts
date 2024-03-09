@@ -21,6 +21,14 @@ const getMics = async (day?: string) => {
   return mics;
 };
 
+const getMic = async (id?: number) => {
+  const mics = await prisma.mics.findMany({
+    where: { id: id },
+  });
+
+  return mics;
+};
+
 console.log("Service is working ------", getMics);
 
-export default getMics;
+export { getMics, getMic };
