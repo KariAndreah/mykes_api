@@ -18,6 +18,12 @@ const getMics = async (params: any) => {
   );
 
   const mics = await prisma.mics.findMany({
+    include: {
+      mic_address: true,
+      mic_cost: true,
+      mic_host: true,
+      mic_occurrence: true,
+    },
     where: {
       day: params.day,
       borough: params.borough,
@@ -33,6 +39,12 @@ const getMics = async (params: any) => {
 const getMic = async (id?: number) => {
   const mics = await prisma.mics.findUnique({
     where: { id: id },
+    include: {
+      mic_address: true,
+      mic_cost: true,
+      mic_host: true,
+      mic_occurrence: true,
+    },
   });
 
   return mics;
