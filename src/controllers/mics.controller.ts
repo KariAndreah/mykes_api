@@ -5,7 +5,8 @@ import { getMics, getMic } from "../services/mics.service";
 const router = express.Router();
 
 const micsController = router.get("/mics", async (req, res, next) => {
-  let page: any = req.query.page;
+  let pageNo: any = req.query.pageNo || 1;
+  let pageSize: any = req.query.pageSize || 10;
 
   let params = {
     day: req.query.day,
@@ -20,18 +21,19 @@ const micsController = router.get("/mics", async (req, res, next) => {
 
     const pageCount = Math.ceil(mics.length / 10);
 
-    if (!page) {
-      page = 1;
+    if (!pageNo) {
+      pageNo = 1;
     }
-    if (page > pageCount) {
-      page = pageCount;
+    if (pageNo > pageCount) {
+      pageNo = pageCount;
     }
 
     res.status(200).json({
-      currentPage: page,
+      pageNo: pageNo,
+      pageSize: pageSize,
       totalPages: pageCount,
       totalMics: mics.length,
-      mics: mics.slice(page * 10 - 10, page * 10),
+      mics: mics.slice(pageNo * pageSize - pageSize, pageNo * pageSize),
     });
   } catch (error) {
     next(error);
