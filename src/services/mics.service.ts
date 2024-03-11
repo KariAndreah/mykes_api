@@ -24,6 +24,8 @@ const getMics = async (params: any) => {
       mic_host: true,
       mic_occurrence: true,
     },
+    take: params.limit,
+    skip: params.offset,
     where: {
       day: params.day,
       borough: params.borough,
