@@ -16,8 +16,8 @@ import individualRouter from "./app/mics/routes/individual-route.js";
 import cors from "cors";
 import { api, mic } from "./src/routes/routes.js";
 
-import swaggerDocument from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
+import swaggerUI from "swagger-ui-express";
+import swaggerSpec from "./swagger";
 
 const app = express();
 const PORT = process.env.PORT || 9999;
@@ -62,7 +62,7 @@ app.get("/", (req, res) => {
 
 app.use(api, mic);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT} `)
