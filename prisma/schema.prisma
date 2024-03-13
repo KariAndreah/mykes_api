@@ -7,6 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model host_mics {
+  mics_id  BigInt
+  host_id  BigInt
+  mic_host mic_host @relation(fields: [host_id], references: [host_id], onDelete: NoAction, onUpdate: NoAction)
+  mics     mics     @relation(fields: [mics_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([mics_id, host_id])
+}
+
 model mic_address {
   address_id   BigInt  @id(map: "mic_address_pk") @default(autoincrement())
   city         String? @db.VarChar(255)
@@ -29,13 +38,13 @@ model mic_cost {
 }
 
 model mic_host {
-  host_id     BigInt  @id(map: "mic_host_pk") @default(autoincrement())
-  fifth_host  String? @db.VarChar(255)
-  first_host  String? @db.VarChar(255)
-  fourth_host String? @db.VarChar(255)
-  second_host String? @db.VarChar(255)
-  third_host  String? @db.VarChar(255)
-  mics        mics[]
+  host_id    BigInt      @id(map: "mic_host_pk") @default(autoincrement())
+  fifth_host String?     @db.VarChar(255)
+  first_host String?     @db.VarChar(255)
+  email      String?     @db.VarChar(255)
+  instagram  String?     @db.VarChar(255)
+  third_host String?     @db.VarChar(255)
+  host_mics  host_mics[]
 }
 
 model mic_occurrence {
@@ -57,9 +66,9 @@ model mics {
   signup_id           BigInt?
   notes               String?              @db.VarChar(255)
   occurrence_id       BigInt?
+  host_mics           host_mics[]
   mic_address         mic_address?         @relation(fields: [address_id], references: [address_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_address_fk")
   mic_cost            mic_cost?            @relation(fields: [cost_id], references: [cost_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_cost_fk")
-  mic_host            mic_host?            @relation(fields: [host_id], references: [host_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_host_fk")
   mic_occurrence      mic_occurrence?      @relation(fields: [occurrence_id], references: [occurrence_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_occurrence_fk")
   signup_instructions signup_instructions? @relation(fields: [signup_id], references: [signup_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_signup_instructions_fk")
 }

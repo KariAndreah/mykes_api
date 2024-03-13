@@ -95,7 +95,7 @@ main()
     process.exit(1);
   });
 
-console.log("what is this kari", allMics);
+// console.log("what is this kari", allMics);
 export {
   allMics,
   getMicListing,

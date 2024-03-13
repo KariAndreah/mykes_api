@@ -28,8 +28,8 @@ const getMicByBorough = async (req, res) => {
   let borough = req.query.borough;
   let page = parseInt(req.query.page);
 
-  console.log(req.query.page);
-  console.log(req.query.borough);
+  // console.log(req.query.page);
+  // console.log(req.query.borough);
 
   await pool.query(getMicListingByBorough, [borough], (error, results) => {
     const pageCount = Math.ceil(results.rows.length / 10);
@@ -57,8 +57,8 @@ const getMicByBoroughFree = async (req, res) => {
   let borough = req.query.borough;
   let page = parseInt(req.query.page);
 
-  console.log(req.query.page);
-  console.log(req.query.borough);
+  // console.log(req.query.page);
+  // console.log(req.query.borough);
 
   await pool.query(getMicListingByBoroughFree, [borough], (error, results) => {
     const pageCount = Math.ceil(results.rows.length / 10);
@@ -86,9 +86,9 @@ const getMicByBoroughDay = async (req, res) => {
   let borough = req.query.borough;
   let day = req.query.day;
   let page = parseInt(req.query.page);
-  console.log(req.query.page);
-  console.log(req.query.borough);
-  console.log(req.query.day);
+  // console.log(req.query.page);
+  // console.log(req.query.borough);
+  // console.log(req.query.day);
 
   await pool.query(
     getMicListingByBoroughDay,
@@ -122,8 +122,8 @@ const getMicByBoroughDayFree = async (req, res) => {
   // let cost = parseInt(req.query.cost);
   let page = parseInt(req.query.page);
 
-  console.log(req.query.borough);
-  console.log(req.query.day);
+  // console.log(req.query.borough);
+  // console.log(req.query.day);
   await pool.query(
     getMicListingByBoroughDayFree,
     [borough, day],
@@ -151,7 +151,7 @@ const getMicByBoroughDayFree = async (req, res) => {
 };
 
 const getSomeMics = (req, res) => {
-  console.log("getting some mics");
+  // console.log("getting some mics");
 };
 
 export {

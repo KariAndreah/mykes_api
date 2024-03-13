@@ -8,14 +8,18 @@ const micsController = router.get("/mics", async (req, res, next) => {
   let pageNo: any = req.query.pageNo || 1;
   let pageSize: any = req.query.pageSize || 10;
 
+  let borough: any = req.query.borough || "";
+  var boroughArray = borough.split(",");
+
   let params = {
     day: req.query.day,
-    borough: req.query.borough,
+    borough: boroughArray,
     // start_time: req.query.time,
     cost: req.query.free,
   };
 
-  console.log("This is the Cost: ", params.cost);
+  console.log("This is the borough", typeof borough);
+  // console.log("This is the Cost: ", params.cost);
   try {
     const mics = await getMics(params);
 
@@ -44,7 +48,7 @@ const micController = router.get("/mic", async (req, res, next) => {
   let page: any = req.query.page;
   let id: any = req.query.id;
 
-  console.log("This is the Page Number: ", page);
+  // console.log("This is the Page Number: ", page);
   try {
     const mics = await getMic(id);
 
@@ -68,6 +72,6 @@ const micController = router.get("/mic", async (req, res, next) => {
   }
 });
 
-console.log("Controller is working -----", micController);
+// console.log("Controller is working -----", micController);
 
 export { micController, micsController };

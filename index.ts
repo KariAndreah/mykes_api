@@ -14,7 +14,10 @@ import dayRouter from "./app/mics/routes/day-route.js";
 import dayFreeRouter from "./app/mics/routes/day-free-route.js";
 import individualRouter from "./app/mics/routes/individual-route.js";
 import cors from "cors";
-import { api, mic } from "./src/routes/routes";
+import { api, mic } from "./src/routes/routes.js";
+
+import swaggerDocument from "swagger-jsdoc";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 const PORT = process.env.PORT || 9999;
@@ -58,6 +61,8 @@ app.get("/", (req, res) => {
 // app.use("/mic", individualRouter);
 
 app.use(api, mic);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, () =>
   console.log(`Server running on port: http://localhost:${PORT} `)
