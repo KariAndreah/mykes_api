@@ -9,7 +9,7 @@ const getMics = async (params: any) => {
 
   if (params.cost === "true") {
     mic_cost = 1;
-    // console.log("Is this working???");
+    console.log("Is this working???");
   }
 
   // console.log(

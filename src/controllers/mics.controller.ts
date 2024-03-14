@@ -65,7 +65,7 @@ const micController = router.get("/mic", async (req, res, next) => {
       currentPage: page,
       totalPages: 1,
       totalMics: 1,
-      mics: mics,
+      mic: mics,
     });
   } catch (error) {
     next(error);
