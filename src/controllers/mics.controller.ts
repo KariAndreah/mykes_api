@@ -14,6 +14,8 @@ const micsController = router.get("/mics", async (req, res, next) => {
   let params = {
     day: req.query.day,
     borough: boroughArray,
+    limit: Number(req.query.limit),
+    offset: Number(req.query.offset),
     // start_time: req.query.time,
     cost: req.query.free,
   };
@@ -21,7 +23,7 @@ const micsController = router.get("/mics", async (req, res, next) => {
   console.log("This is the borough", typeof borough);
   // console.log("This is the Cost: ", params.cost);
   try {
-    const mics = await getMics(params);
+    const { mics, count } = await getMics(params);
 
     const pageCount = Math.ceil(mics.length / 10);
 
@@ -33,11 +35,10 @@ const micsController = router.get("/mics", async (req, res, next) => {
     }
 
     res.status(200).json({
-      pageNo: pageNo,
-      pageSize: pageSize,
-      totalPages: pageCount,
-      totalMics: mics.length,
-      mics: mics.slice(pageNo * pageSize - pageSize, pageNo * pageSize),
+      totalMics: count,
+      offset: params.offset,
+      limit: params.limit,
+      mics: mics,
     });
   } catch (error) {
     next(error);

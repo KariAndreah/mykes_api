@@ -40,22 +40,34 @@ const getMics = async (params: any) => {
     passingBorough
   );
 
-  const mics = await prisma.mics.findMany({
-    include: {
-      mic_address: true,
-      mic_cost: true,
-      mic_occurrence: true,
-    },
-    where: {
-      day: params.day,
-      borough: { in: passingBorough },
-      // start_time: params.start_time,
-      cost_id: mic_cost,
-    },
-    orderBy: { start_time: "asc" },
-  });
+  const [mics, count] = await prisma.$transaction([
+    prisma.mics.findMany({
+      include: {
+        mic_address: true,
+        mic_cost: true,
+        mic_occurrence: true,
+      },
+      where: {
+        day: params.day,
+        borough: { in: passingBorough },
+        // start_time: params.start_time,
+        cost_id: mic_cost,
+      },
+      orderBy: { start_time: "asc" },
+      skip: params.offset,
+      take: params.limit,
+    }),
+    prisma.mics.count({
+      where: {
+        day: params.day,
+        borough: { in: passingBorough },
+        // start_time: params.start_time,
+        cost_id: mic_cost,
+      },
+    }),
+  ]);
 
-  return mics;
+  return { mics, count };
 };
 
 const getMic = async (id?: number) => {
