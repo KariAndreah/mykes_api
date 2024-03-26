@@ -11,13 +11,38 @@ const micsController = router.get("/mics", async (req, res, next) => {
   let borough: any = req.query.borough || "";
   var boroughArray = borough.split(",");
 
+  if (boroughArray.includes("All" || "")) {
+    boroughArray = [
+      "Manhattan",
+      "Queens",
+      "Staten-Island",
+      "Bronx",
+      "Brooklyn",
+    ];
+  }
+
+  let day: any = req.query.day || "";
+  let dayArray = day.split(",");
+
+  if (dayArray.includes("All" || "")) {
+    dayArray = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  }
+
   let params = {
-    day: req.query.day,
+    day: dayArray,
     borough: boroughArray,
-    limit: Number(req.query.limit),
-    offset: Number(req.query.offset),
+    limit: Number(req.query.limit) || 10,
+    offset: Number(req.query.offset) || 0,
     // start_time: req.query.time,
-    cost: req.query.free,
+    cost: req.query.free || "false",
   };
 
   console.log("This is the borough", typeof borough);

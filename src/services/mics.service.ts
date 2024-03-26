@@ -19,7 +19,7 @@ const getMics = async (params: any) => {
   //   mic_cost
   // );
   let passingBorough;
-  if (params.borough.length === 1) {
+  if (params.borough.includes("")) {
     passingBorough = [
       "Manhattan",
       "Queens",
@@ -27,7 +27,16 @@ const getMics = async (params: any) => {
       "Bronx",
       "Brooklyn",
     ];
-    console.log("This is the length", params.borough.length);
+    //   console.log("This is the borough", params.borough);
+    //   if (params.borough.includes("All")) {
+    //     passingBorough = [
+    //       "Manhattan",
+    //       "Queens",
+    //       "Staten-Island",
+    //       "Bronx",
+    //       "Brooklyn",
+    //     ];
+    //   }
   } else {
     console.log("else is working");
     passingBorough = params.borough;
@@ -36,8 +45,43 @@ const getMics = async (params: any) => {
   console.log(
     "This is the params",
     params.borough,
-    "This is the passingBorough",
-    passingBorough
+    "This is the passingBorough"
+    // passingBorough
+  );
+
+  let passingDay;
+  if (params.day.includes("")) {
+    passingDay = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    //   console.log("This is the day", params.day);
+    //   if (params.day.includes("All")) {
+    //     passingDay = [
+    //       "Sunday",
+    //       "Monday",
+    //       "Tuesday",
+    //       "Wednesday",
+    //       "Thursday",
+    //       "Friday",
+    //       "Saturday",
+    //     ];
+    //   }
+  } else {
+    console.log("else is working");
+    passingDay = params.day;
+  }
+
+  console.log(
+    "This is the params",
+    params.day,
+    "This is the passingDay"
+    // passingDay
   );
 
   const [mics, count] = await prisma.$transaction([
@@ -48,7 +92,7 @@ const getMics = async (params: any) => {
         mic_occurrence: true,
       },
       where: {
-        day: params.day,
+        day: { in: passingDay },
         borough: { in: passingBorough },
         // start_time: params.start_time,
         cost_id: mic_cost,
@@ -59,7 +103,7 @@ const getMics = async (params: any) => {
     }),
     prisma.mics.count({
       where: {
-        day: params.day,
+        day: { in: passingDay },
         borough: { in: passingBorough },
         // start_time: params.start_time,
         cost_id: mic_cost,
