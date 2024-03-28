@@ -8,31 +8,31 @@ const micsController = router.get("/mics", async (req, res, next) => {
   let pageNo: any = req.query.pageNo || 1;
   let pageSize: any = req.query.pageSize || 10;
 
-  let borough: any = req.query.borough || "";
+  let borough: any = req.query.borough;
   var boroughArray = borough.split(",");
 
-  if (boroughArray.includes("All" || "")) {
+  if (borough === "all") {
     boroughArray = [
-      "Manhattan",
-      "Queens",
-      "Staten-Island",
-      "Bronx",
-      "Brooklyn",
+      "manhattan",
+      "queens",
+      "staten-island",
+      "bronx",
+      "brooklyn",
     ];
   }
-
-  let day: any = req.query.day || "";
+  console.log("this is what is going to params", borough);
+  let day: any = req.query.day;
   let dayArray = day.split(",");
 
-  if (dayArray.includes("All" || "")) {
+  if (day === "all") {
     dayArray = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
     ];
   }
 

@@ -21,11 +21,11 @@ const getMics = async (params: any) => {
   let passingBorough;
   if (params.borough.includes("")) {
     passingBorough = [
-      "Manhattan",
-      "Queens",
-      "Staten-Island",
-      "Bronx",
-      "Brooklyn",
+      "manhattan",
+      "queens",
+      "staten-island",
+      "bronx",
+      "brooklyn",
     ];
     //   console.log("This is the borough", params.borough);
     //   if (params.borough.includes("All")) {
@@ -52,13 +52,13 @@ const getMics = async (params: any) => {
   let passingDay;
   if (params.day.includes("")) {
     passingDay = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
     ];
     //   console.log("This is the day", params.day);
     //   if (params.day.includes("All")) {
