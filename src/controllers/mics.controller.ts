@@ -41,9 +41,11 @@ const micsController = router.get("/mics", async (req, res, next) => {
     borough: boroughArray,
     limit: Number(req.query.limit) || 10,
     offset: Number(req.query.offset) || 0,
-    // start_time: req.query.time,
+    start_time: req.query.start_time,
     cost: req.query.free || "false",
   };
+
+  console.log("This is the start time: ", params.start_time);
 
   console.log("This is the borough", typeof borough);
   // console.log("This is the Cost: ", params.cost);

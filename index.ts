@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { api, mic } from "./src/routes/routes.js";
+import { api } from "./src/routes/routes.js";
 
 import swaggerUI from "swagger-ui-express";
 import swaggerSpec from "./swagger";
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
   res.send("Hello from Homepage");
 });
 
-app.use(api, mic);
+app.use(api);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
