@@ -35,6 +35,7 @@ model mic_cost {
   cost_id     BigInt  @id(map: "mic_cost_pk") @default(autoincrement())
   cost_amount String? @db.VarChar(255)
   mics        mics[]
+ 
 }
 
 model mic_host {
@@ -66,7 +67,7 @@ model mics {
   signup_id           BigInt?
   notes               String?              @db.VarChar(255)
   occurrence_id       BigInt?
-  host_mics           host_mics[]
+  host_mics           host_mics[] 
   mic_address         mic_address?         @relation(fields: [address_id], references: [address_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_address_fk")
   mic_cost            mic_cost?            @relation(fields: [cost_id], references: [cost_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_cost_fk")
   mic_occurrence      mic_occurrence?      @relation(fields: [occurrence_id], references: [occurrence_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_occurrence_fk")
