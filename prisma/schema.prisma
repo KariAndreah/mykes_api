@@ -48,6 +48,7 @@ model mic_host {
   host_mics  host_mics[]
 }
 
+
 model mic_occurrence {
   occurrence_id BigInt  @id(map: "mic_occurrence_pk")
   schedule      String? @db.VarChar
@@ -67,6 +68,10 @@ model mics {
   signup_id           BigInt?
   notes               String?              @db.VarChar(255)
   occurrence_id       BigInt?
+  instagram           String?              @db.VarChar(255)
+  website             String?              @db.VarChar(255)
+  email_address       String?              @db.VarChar(255)
+  phone_number        String?              @db.VarChar(255)
   host_mics           host_mics[] 
   mic_address         mic_address?         @relation(fields: [address_id], references: [address_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_address_fk")
   mic_cost            mic_cost?            @relation(fields: [cost_id], references: [cost_id], onDelete: NoAction, onUpdate: NoAction, map: "mics_mic_cost_fk")
